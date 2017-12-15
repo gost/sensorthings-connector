@@ -1,0 +1,39 @@
+{
+    "moduleId": "foobot1",
+    "allowDuplicateResultvalues": false,
+    "secretKey": "",
+    "fetchIntervalSeconds": 600,
+    "mappings": [
+        {            
+            "uuid": "",
+            "name": "pk1_foobot",
+            "server": "http://127.0.0.1:9000/v1.0/",
+            "streams": [
+                {
+                    "sensor": "pm",
+                    "streamId": "15"
+                },
+                {
+                    "sensor": "tmp",
+                    "streamId": "16"
+                },
+                {
+                    "sensor": "hum",
+                    "streamId": "17"
+                },
+                {
+                    "sensor": "co2",
+                    "streamId": "18"
+                },
+                {
+                    "sensor": "voc",
+                    "streamId": "19"
+                },
+                {
+                    "sensor": "allpollu",
+                    "streamId": "20"
+                }
+            ]
+        }
+    ]
+}

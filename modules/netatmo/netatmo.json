@@ -1,0 +1,95 @@
+{
+    "moduleId": "netatmo1",
+    "clientId": "",
+    "clientSecret": "",
+    "username": "",
+    "password": "",
+    "fetchIntervalSeconds": 300,
+    "allowDuplicateResultValues": false,
+    "mappings": [
+        {            
+            "moduleId": "70:ee:50:1d:f1:de",
+            "name": "vz1_indoor",
+            "server": "http://127.0.0.1:9000/v1.0",
+            "streams": [
+                {
+                    "type": "Temperature",
+                    "streamId": "1"
+                },
+                {
+                    "type": "Humidity",
+                    "streamId": "2"
+                },
+                {
+                    "type": "Pressure",
+                    "streamId": "3"
+                },
+                {
+                    "type": "CO2",
+                    "streamId": "4"
+                },
+                {
+                    "type": "Noise",
+                    "streamId": "5"
+                }
+            ]
+        },
+        {
+            "moduleId": "02:00:00:1e:29:98",
+            "name": "vz1_outdoor",
+            "server": "http://127.0.0.1:9000/v1.0",
+            "streams": [
+                {
+                    "type": "Temperature",
+                    "streamId": "6"
+                },
+                {
+                    "type": "Humidity",
+                    "streamId": "7"
+                }
+            ]
+        },
+        {            
+            "moduleId": "70:ee:50:03:65:d4",
+            "name": "pk1_indoor",
+            "server": "http://127.0.0.1:9000/v1.0",
+            "streams": [
+                {
+                    "type": "Temperature",
+                    "streamId": "8"
+                },
+                {
+                    "type": "Humidity",
+                    "streamId": "9"
+                },
+                {
+                    "type": "Pressure",
+                    "streamId": "10"
+                },
+                {
+                    "type": "CO2",
+                    "streamId": "11"
+                },
+                {
+                    "type": "Noise",
+                    "streamId": "12"
+                }
+            ]
+        },
+        {
+            "moduleId": "02:00:00:03:5d:52",
+            "name": "pk1_outdoor",
+            "server": "http://127.0.0.1:9000/v1.0",
+            "streams": [
+                {
+                    "type": "Temperature",
+                    "streamId": "13"
+                },
+                {
+                    "type": "Humidity",
+                    "streamId": "14"
+                }
+            ]
+        }
+    ]
+}
