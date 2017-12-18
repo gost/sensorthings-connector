@@ -74,6 +74,12 @@ func (m *Module) getReadings() {
 		res, err := foobotClient.Do(req)
 		if err != nil {
 			m.SendError(err, false)
+			return
+		}
+
+		if res == nil {
+			m.SendError(fmt.Errorf("response is nil"), false)
+			return
 		}
 
 		if res.StatusCode == 401 {
@@ -85,12 +91,14 @@ func (m *Module) getReadings() {
 		body, err := ioutil.ReadAll(res.Body)
 		if err != nil {
 			m.SendError(err, false)
+			return
 		}
 
 		fj := FoobotJSON{}
 		err = json.Unmarshal(body, &fj)
 		if err != nil {
 			m.SendError(err, false)
+			return
 		}
 
 		m.handleReadings(ma, fj)
