@@ -49,7 +49,7 @@ POST body
 ```
 
 Status 400 when sending incorrect body or module not found  
-Status 409 when the module is crashed and cannot be started  
+Status 500 when the module is crashed and cannot be started  
 Status 200 if no problem occured and the module started/stopped  
 
 Response body contains errors explaining the error when status 400 or 409 was send back 

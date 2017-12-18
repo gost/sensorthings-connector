@@ -4,7 +4,7 @@
     "clientSecret": "",
     "username": "",
     "password": "",
-    "fetchIntervalSeconds": 300,
+    "fetchIntervalSeconds": 600,
     "allowDuplicateResultValues": false,
     "mappings": [
         {            
