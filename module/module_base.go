@@ -122,7 +122,7 @@ func (c *ConnectorModuleBase) SendLocation(host, thingID string, location Locati
 
 func (c *ConnectorModuleBase) statusCallback(resp *http.Response, err error) {
 	c.mutex.Lock()
-	if err != nil {
+	if err == nil {
 		c.ModuleData.Status.ObservationsPostedOk = c.ModuleData.Status.ObservationsPostedOk + 1
 	} else {
 		c.ModuleData.Status.ObservationsPostedFailed = c.ModuleData.Status.ObservationsPostedFailed + 1
