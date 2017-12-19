@@ -21,7 +21,7 @@ type IConnectorModule interface {
 }
 
 // PostStatus function definition is used as a callback when posting data to a SensorThings server
-type PostStatus func(success bool, response *http.Response)
+type PostStatus func(response *http.Response, err error)
 
 // ConnectorModuleStatus contains information about the status of a module
 type ConnectorModuleStatus struct {

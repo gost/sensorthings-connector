@@ -120,15 +120,20 @@ func (c *ConnectorModuleBase) SendLocation(host, thingID string, location Locati
 	ch <- msg
 }
 
-func (c *ConnectorModuleBase) statusCallback(success bool, resp *http.Response) {
+func (c *ConnectorModuleBase) statusCallback(resp *http.Response, err error) {
 	c.mutex.Lock()
-	if success {
+	if err != nil {
 		c.ModuleData.Status.ObservationsPostedOk = c.ModuleData.Status.ObservationsPostedOk + 1
 	} else {
 		c.ModuleData.Status.ObservationsPostedFailed = c.ModuleData.Status.ObservationsPostedFailed + 1
-		defer resp.Body.Close()
-		body, _ := ioutil.ReadAll(resp.Body)
-		c.SendError(fmt.Errorf("error posting to server: %v", string(body)), false)
+
+		if resp != nil && resp.Body != nil {
+			defer resp.Body.Close()
+			body, _ := ioutil.ReadAll(resp.Body)
+			c.SendError(fmt.Errorf("error posting to server: %v", string(body)), false)
+		} else {
+			c.SendError(fmt.Errorf("error posting to server: %v", err), false)
+		}
 	}
 	c.mutex.Unlock()
 }

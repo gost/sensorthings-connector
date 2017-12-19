@@ -10,8 +10,8 @@ import (
 
 	"github.com/gost/sensorthings-connector/configuration"
 	"github.com/gost/sensorthings-connector/connector"
-	"github.com/kz/discordrus"
 	log "github.com/sirupsen/logrus"
+	"github.com/tebben/discordrus"
 )
 
 var (

@@ -151,13 +151,13 @@ func listenForErrors() {
 }
 
 func sendObservation(msg module.ObservationMessage) {
-	b, ok := module.PostJSON(constructObservationURL(msg.Host, msg.DatastreamID), msg.Observation, 201)
-	msg.Status(ok, b)
+	b, err := module.PostJSON(constructObservationURL(msg.Host, msg.DatastreamID), msg.Observation, 201)
+	msg.Status(b, err)
 }
 
 func sendLocation(msg module.LocationMessage) {
-	b, ok := module.PostJSON(constructLocationURL(msg.Host, msg.ThingID), msg.Location, 201)
-	msg.Status(ok, b)
+	b, err := module.PostJSON(constructLocationURL(msg.Host, msg.ThingID), msg.Location, 201)
+	msg.Status(b, err)
 }
 
 func constructObservationURL(host, streamID string) string {

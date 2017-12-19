@@ -3,6 +3,7 @@ package module
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"net/http"
 	"net/url"
@@ -42,7 +43,7 @@ func GetJSON(urlStr string, target interface{}) error {
 }
 
 // PostJSON is used to post data as JSON to a server
-func PostJSON(urlStr string, data interface{}, expectedStatus int) (*http.Response, bool) {
+func PostJSON(urlStr string, data interface{}, expectedStatus int) (*http.Response, error) {
 	b, _ := json.Marshal(data)
 	req, _ := http.NewRequest("POST", urlStr, bytes.NewBuffer(b))
 	req.Header.Set("Content-Type", "application/json")
@@ -50,14 +51,14 @@ func PostJSON(urlStr string, data interface{}, expectedStatus int) (*http.Respon
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return nil, false
+		return nil, err
 	}
 
 	if expectedStatus != resp.StatusCode {
-		return resp, false
+		return resp, fmt.Errorf("Unexpected StatusCode, expected %v got %v", expectedStatus, resp.StatusCode)
 	}
 
-	return resp, true
+	return resp, nil
 }
 
 // URLEncoded encodes a string like Javascript's encodeURIComponent()
