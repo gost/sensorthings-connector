@@ -52,7 +52,7 @@ Status 400 when sending incorrect body or module not found
 Status 500 when the module is crashed and cannot be started  
 Status 200 if no problem occured and the module started/stopped  
 
-Response body contains errors explaining the error when status 400 or 409 was send back 
+Response body contains errors explaining the error when status 400 or 500 was send back 
 
 ### /moduleid/xxx
 Every module can expose their own endpoints to see which endpoints are available for a module check out /Modules
