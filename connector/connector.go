@@ -2,6 +2,7 @@ package connector
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/gost/sensorthings-connector/configuration"
@@ -33,7 +34,11 @@ func Start(config configuration.ConnectorConfig) {
 	go listenForErrors()
 
 	// load and setup modules
-	initModules()
+	modulePath := config.ModulePath
+	if len(modulePath) == 0 {
+		modulePath = os.Args[0]
+	}
+	initModules(modulePath)
 
 	// start the modules
 	if config.StartModulesOnStartup {
@@ -49,8 +54,8 @@ func Stop() {
 	stopModules()
 }
 
-func initModules() {
-	mod := loadModules(&observations, &locations, &errors)
+func initModules(configPath string) {
+	mod := loadModules(configPath, &observations, &locations, &errors)
 	for _, m := range mod {
 		data := (*m).GetConnectorModuleData()
 		if data.Status.Fatal {

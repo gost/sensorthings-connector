@@ -16,11 +16,11 @@ var (
 )
 
 // loadModules searches for *.so files and tries to load it as a ConnectorModule
-func loadModules(obsChannel *chan module.ObservationMessage, locChannel *chan module.LocationMessage, errorChannel *chan module.ErrorMessage) []*module.IConnectorModule {
+func loadModules(modulePath string, obsChannel *chan module.ObservationMessage, locChannel *chan module.LocationMessage, errorChannel *chan module.ErrorMessage) []*module.IConnectorModule {
 	flag.Parse()
 	modulePaths = map[string]string{}
 	modules := make([]*module.IConnectorModule, 0)
-	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+	dir, _ := filepath.Abs(filepath.Dir(modulePath))
 	filepath.Walk(dir, visit)
 
 	for k, v := range modulePaths {

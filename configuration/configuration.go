@@ -10,6 +10,7 @@ type Config struct {
 type ConnectorConfig struct {
 	Host                  string `json:"host"`
 	Port                  int    `json:"port"`
+	ModulePath            string `json:"modulePath"`
 	StartModulesOnStartup bool   `json:"startModulesOnStartup"`
 }
 
