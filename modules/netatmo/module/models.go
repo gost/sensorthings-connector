@@ -3,7 +3,7 @@ package netatmo
 import (
 	"time"
 
-	netatmo "github.com/exzz/netatmo-api-go"
+	netatmo "github.com/tebben/netatmo-api-go"
 	"github.com/gost/sensorthings-connector/module"
 )
 

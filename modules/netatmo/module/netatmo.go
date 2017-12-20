@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	netatmo "github.com/exzz/netatmo-api-go"
 	"github.com/gost/sensorthings-connector/module"
+	netatmo "github.com/tebben/netatmo-api-go"
 )
 
 var (

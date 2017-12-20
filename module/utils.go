@@ -47,12 +47,16 @@ func PostJSON(urlStr string, data interface{}, expectedStatus int) (*http.Respon
 	b, _ := json.Marshal(data)
 	req, _ := http.NewRequest("POST", urlStr, bytes.NewBuffer(b))
 	req.Header.Set("Content-Type", "application/json")
+	req.Close = true
+
 	client := &http.Client{}
 
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
+
+	defer resp.Body.Close()
 
 	if expectedStatus != resp.StatusCode {
 		return resp, fmt.Errorf("Unexpected StatusCode, expected %v got %v", expectedStatus, resp.StatusCode)

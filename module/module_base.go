@@ -135,6 +135,7 @@ func (c *ConnectorModuleBase) statusCallback(resp *http.Response, err error) {
 			c.SendError(fmt.Errorf("error posting to server: %v", err), false)
 		}
 	}
+
 	c.mutex.Unlock()
 }
 
