@@ -32,7 +32,8 @@ type ConnectorModuleStatus struct {
 	LastPost                 string   `json:"lastPost"`
 	ObservationsPostedOk     int64    `json:"postSuccess"`
 	ObservationsPostedFailed int64    `json:"postFailed"`
-	Errors                   []string `json:"errors"`
+	ErrorCount               int      `json:"errorCount"`
+	LastErrors               []string `json:"lastErrors"`
 }
 
 // ErrorMessage send over ErrorChannel, an ErrorMessage should be send from a module

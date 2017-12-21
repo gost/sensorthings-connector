@@ -14,7 +14,7 @@ func NewConnectorModuleData(version, fileName, filePath string, obsChannel *chan
 		Status:             &ConnectorModuleStatus{},
 	}
 
-	cm.Status.Errors = make([]string, 0)
+	cm.Status.LastErrors = make([]string, 0)
 
 	return &cm
 }
@@ -38,11 +38,13 @@ func (c *ConnectorModuleData) AddError(err error) {
 		maxErrors = 50
 	}
 
+	c.Status.ErrorCount = c.Status.ErrorCount + 1
+
 	// Prepend
-	c.Status.Errors = append([]string{fmt.Sprintf("%v", err)}, c.Status.Errors...)
+	c.Status.LastErrors = append([]string{fmt.Sprintf("%v", err)}, c.Status.LastErrors...)
 
 	// Remove if more than XX errors
-	if len(c.Status.Errors) > maxErrors {
-		c.Status.Errors = append(c.Status.Errors[:maxErrors], c.Status.Errors[maxErrors+1:]...)
+	if len(c.Status.LastErrors) > maxErrors {
+		c.Status.LastErrors = append(c.Status.LastErrors[:maxErrors], c.Status.LastErrors[maxErrors+1:]...)
 	}
 }

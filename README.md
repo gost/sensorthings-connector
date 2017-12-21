@@ -10,7 +10,7 @@ On startup the connector looks for config.json if the -config flag is not suppli
     "connector":{
       "host":"0.0.0.0", // string (ip to run the HTTP server on)
       "port":5000, // int (port to run HTTP server on)
-      "modulePath": "", // path to module folder leave empty to use program location (os.Args[0])
+      "modulePath": "", // path to modules folder leave empty to use program location (os.Args[0])
       "startModulesOnStartup": true // bool (start the modules on startup, if set to false modules must be started using the REST service)
     },
     // logging config

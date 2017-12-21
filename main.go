@@ -112,7 +112,7 @@ func startStatusReporter(cfg configuration.StatusConfig) {
 					"Latest POST time": status.LastPost,
 					"POST success":     status.ObservationsPostedOk,
 					"POST failed":      status.ObservationsPostedFailed,
-					"Errors":           len(status.Errors),
+					"Errors":           status.ErrorCount,
 				}).Infof("Status report for module %s", data.ModuleFileName)
 			}
 		}

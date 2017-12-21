@@ -59,7 +59,7 @@ func initModules(configPath string) {
 	for _, m := range mod {
 		data := (*m).GetConnectorModuleData()
 		if data.Status.Fatal {
-			log.Errorf("Error loading module %s: %v\n", data.ModuleFileName, data.Status.Errors[0])
+			log.Errorf("Error loading module %s: %v\n", data.ModuleFileName, data.Status.LastErrors[0])
 		} else {
 			log.Infof("Module %s loaded: %s - %s  ", data.ModuleFileName, (*m).GetName(), (*m).GetDescription())
 		}

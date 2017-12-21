@@ -85,7 +85,7 @@ func stateHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	if state.On {
 		error := startModule(module, false)
 		if error != nil {
-			state.Errors = append(state.Errors, (*module).GetConnectorModuleData().Status.Errors...)
+			state.Errors = append(state.Errors, (*module).GetConnectorModuleData().Status.LastErrors...)
 			sendState(module, state, w, r, http.StatusInternalServerError)
 			return
 		}
