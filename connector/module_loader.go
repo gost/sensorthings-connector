@@ -11,17 +11,21 @@ import (
 	"github.com/gost/sensorthings-connector/module"
 )
 
-var (
-	modulePaths map[string]string
-)
-
 // loadModules searches for *.so files and tries to load it as a ConnectorModule
 func loadModules(modulePath string, obsChannel *chan module.ObservationMessage, locChannel *chan module.LocationMessage, errorChannel *chan module.ErrorMessage) []*module.IConnectorModule {
 	flag.Parse()
-	modulePaths = map[string]string{}
+	modulePaths := map[string]string{}
 	modules := make([]*module.IConnectorModule, 0)
 	dir, _ := filepath.Abs(filepath.Dir(modulePath))
-	filepath.Walk(dir, visit)
+
+	// Walk all directories recursively from given directory and look for plugin files (*.so)
+	filepath.Walk(dir, func(path string, f os.FileInfo, _ error) error {
+		if strings.HasSuffix(f.Name(), ".so") {
+			modulePaths[f.Name()] = path
+		}
+
+		return nil
+	})
 
 	for k, v := range modulePaths {
 		// try loading module
@@ -60,15 +64,6 @@ func createDummy(moduleFileName string, d *module.ConnectorModuleData, err error
 func toPointerInterface(i interface{}) *module.IConnectorModule {
 	cm, _ := i.(module.IConnectorModule)
 	return &cm
-}
-
-func visit(path string, f os.FileInfo, err error) error {
-	if !strings.HasSuffix(f.Name(), ".so") {
-		return nil
-	}
-
-	modulePaths[f.Name()] = path
-	return nil
 }
 
 func tryLoadModule(name, path string) (*module.IConnectorModule, error) {
