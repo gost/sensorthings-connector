@@ -1,0 +1,38 @@
+{
+    "moduleId": "homecoach1",
+    "clientId": "",
+    "clientSecret": "",
+    "username": "",
+    "password": "",
+    "fetchIntervalSeconds": 600,
+    "allowDuplicateResultValues": false,
+    "mappings": [
+        {            
+            "moduleId": "70:ee:50:26:08:4e", 
+            "name": "homecoach_pk_1",
+            "server": "http://127.0.0.1:8080/v1.0",
+            "streams": [
+                {
+                    "type": "Noise",
+                    "streamId": "1"
+                },
+                {
+                    "type": "Temperature",
+                    "streamId": "2"
+                },
+                {
+                    "type": "Humidity",
+                    "streamId": "3"
+                },
+                {
+                    "type": "Pressure",
+                    "streamId": "4"
+                },
+                {
+                    "type": "CO2",
+                    "streamId": "5"
+                }
+            ]
+        }
+    ]
+}

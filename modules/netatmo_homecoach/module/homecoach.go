@@ -1,11 +1,10 @@
-package netatmo
+package homecoach
 
 import (
 	"fmt"
 	"time"
 
 	"github.com/gost/sensorthings-connector/module"
-	netatmo "github.com/tebben/netatmo-api-go"
 )
 
 var (
@@ -14,8 +13,8 @@ var (
 
 // Setup initialised the module by setting some default values
 func (m *Module) Setup() error {
-	m.ModuleName = "Netatmo"
-	m.ModuleDescription = "Publish Netatmo readings to a SensorThings server"
+	m.ModuleName = "NetatmoHomecoach"
+	m.ModuleDescription = "Publish Netatmo Homecoach readings to a SensorThings server"
 	m.Endpoints = m.getEndpoints()
 
 	m.settings = Settings{}
@@ -28,14 +27,14 @@ func (m *Module) Setup() error {
 		m.SendError(fmt.Errorf("missing config parameters"), true)
 	}
 
-	m.client, err = netatmo.NewClient(netatmo.Config{
+	m.client, err = NewClient(Config{
 		ClientID:     m.settings.ClientID,
 		ClientSecret: m.settings.ClientSecret,
 		Username:     m.settings.Username,
 		Password:     m.settings.Password,
 	})
 	if err != nil {
-		m.SendError(fmt.Errorf("unable to create Netatmo client"), true)
+		m.SendError(fmt.Errorf("unable to create Netatmo Homecoach client"), true)
 		return err
 	}
 
@@ -70,28 +69,26 @@ func (m *Module) Stop() {
 }
 
 func (m *Module) getReadings() {
-	dc, err := m.client.Read()
+	r, err := m.client.Read()
 	if err != nil {
-		m.SendError(fmt.Errorf("unable to get netatmo sensor values: %v", err), false)
+		m.SendError(fmt.Errorf("unable to get netatmo homecoach sensor values: %v", err), false)
 	} else {
-		for _, station := range dc.Stations() {
-			go m.handleReadings(station.Modules())
-		}
+		m.handleReadings(r)
 	}
 }
 
 // ToDo: Lesser for loops -> create mappings?
-func (m *Module) handleReadings(modules []*netatmo.Device) {
-	for _, mod := range modules {
+func (m *Module) handleReadings(response *Response) {
+	for _, mod := range response.Body.Devices {
 		for _, mapping := range m.settings.Mappings {
 			if mapping.ModuleID == mod.ID {
-				ts, data := mod.Data()
+				data := dashboardDataToMap(mod.DashboardData)
 				for dataType, value := range data {
 					for _, s := range mapping.Streams {
 						if s.Type == dataType {
 							obs := module.Observation{
 								Result:         value,
-								PhenomenonTime: time.Unix(int64(ts), 0).Format(time.RFC3339Nano),
+								PhenomenonTime: time.Unix(int64(mod.DashboardData.TimeUTC), 0).Format(time.RFC3339Nano),
 							}
 
 							m.SendObservation(mapping.Server, s.StreamID, obs)
@@ -101,4 +98,24 @@ func (m *Module) handleReadings(modules []*netatmo.Device) {
 			}
 		}
 	}
+}
+
+func dashboardDataToMap(data DashboardData) map[string]interface{} {
+	dataMap := make(map[string]interface{}, 14)
+	dataMap["AbsolutePressure"] = data.AbsolutePressure
+	dataMap["TimeUTC"] = data.TimeUTC
+	dataMap["HealthIndex"] = data.HealthIndex
+	dataMap["Noise"] = data.Noise
+	dataMap["Temperature"] = data.Temperature
+	dataMap["TempTrend"] = data.TempTrend
+	dataMap["Humidity"] = data.Humidity
+	dataMap["Pressure"] = data.Pressure
+	dataMap["PressureTrend"] = data.PressureTrend
+	dataMap["CO2"] = data.CO2
+	dataMap["DateMaxTemp"] = data.DateMaxTemp
+	dataMap["DateMinTemp"] = data.DateMinTemp
+	dataMap["MinTemp"] = data.MinTemp
+	dataMap["MaxTemp"] = data.MaxTemp
+
+	return dataMap
 }

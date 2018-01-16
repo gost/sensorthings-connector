@@ -1,4 +1,4 @@
-package netatmo
+package homecoach
 
 import (
 	"encoding/json"
