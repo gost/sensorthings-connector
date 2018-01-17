@@ -13,7 +13,7 @@ var (
 
 // Setup initialised the module by setting some default values
 func (m *Module) Setup() error {
-	m.ModuleName = "NetatmoHomecoach"
+	m.ModuleName = "Netatmo Homecoach"
 	m.ModuleDescription = "Publish Netatmo Homecoach readings to a SensorThings server"
 	m.Endpoints = m.getEndpoints()
 

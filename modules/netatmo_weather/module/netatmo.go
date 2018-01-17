@@ -14,8 +14,8 @@ var (
 
 // Setup initialised the module by setting some default values
 func (m *Module) Setup() error {
-	m.ModuleName = "Netatmo"
-	m.ModuleDescription = "Publish Netatmo readings to a SensorThings server"
+	m.ModuleName = "Netatmo Weather"
+	m.ModuleDescription = "Publish Netatmo Weather readings to a SensorThings server"
 	m.Endpoints = m.getEndpoints()
 
 	m.settings = Settings{}
@@ -35,7 +35,7 @@ func (m *Module) Setup() error {
 		Password:     m.settings.Password,
 	})
 	if err != nil {
-		m.SendError(fmt.Errorf("unable to create Netatmo client"), true)
+		m.SendError(fmt.Errorf("unable to create Netatmo Weather client"), true)
 		return err
 	}
 
