@@ -10,27 +10,27 @@
         {            
             "moduleId": "70:ee:50:26:08:4e", 
             "name": "homecoach_pk_1",
-            "server": "http://127.0.0.1:8080/v1.0",
+	    "server": "http://127.0.0.1:9000/v1.0/",
             "streams": [
                 {
                     "type": "Noise",
-                    "streamId": "1"
+                    "streamId": "21"
                 },
                 {
                     "type": "Temperature",
-                    "streamId": "2"
+                    "streamId": "22"
                 },
                 {
                     "type": "Humidity",
-                    "streamId": "3"
+                    "streamId": "23"
                 },
                 {
                     "type": "Pressure",
-                    "streamId": "4"
+                    "streamId": "24"
                 },
                 {
                     "type": "CO2",
-                    "streamId": "5"
+                    "streamId": "25"
                 }
             ]
         }

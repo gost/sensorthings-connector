@@ -1,0 +1,109 @@
+{
+    "moduleId": "tracisarena",
+    "allowDuplicateResultvalues": false,
+    "tracisHost": "",
+    "apiKey": "",
+    "fetchIntervalSeconds": 60,
+    "mappings": [
+        {                        
+            "name": "arena_weather_1",
+            "equipmentId": "270008637",
+            "server": "http://127.0.0.1:8080/v1.0/",
+            "streams": [
+                {
+                    "channelNumber": "1",
+                    "streamId": "1"
+                },
+                {
+                    "channelNumber": "2",
+                    "streamId": "2"
+                },
+                {
+                    "channelNumber": "7",
+                    "streamId": "3"
+                },
+                {
+                    "channelNumber": "8",
+                    "streamId": "4"
+                },
+                {
+                    "channelNumber": "9",
+                    "streamId": "5"
+                },
+                {
+                    "channelNumber": "10",
+                    "streamId": "6"
+                },
+                {
+                    "channelNumber": "11",
+                    "streamId": "7"
+                },
+                {
+                    "channelNumber": "12",
+                    "streamId": "8"
+                }
+            ]
+        },
+        {                        
+            "name": "arena_soil_1",
+            "equipmentId": "0059AC0000173371",
+            "server": "http://127.0.0.1:8080/v1.0/",
+            "streams": [
+                {
+                    "channelNumber": "1",
+                    "streamId": "9"
+                },
+                {
+                    "channelNumber": "2",
+                    "streamId": "10"
+                },
+                {
+                    "channelNumber": "3",
+                    "streamId": "11"
+                },
+                {
+                    "channelNumber": "4",
+                    "streamId": "12"
+                }
+            ]
+        },
+        {                        
+            "name": "arena_soil_2",
+            "equipmentId": "0059AC0000173340",
+            "server": "http://127.0.0.1:8080/v1.0/",
+            "streams": [
+                {
+                    "channelNumber": "1",
+                    "streamId": "13"
+                },
+                {
+                    "channelNumber": "2",
+                    "streamId": "14"
+                },
+                {
+                    "channelNumber": "4",
+                    "streamId": "15"
+                }                
+            ]
+        },
+        {                        
+            "name": "arena_soil_3",
+            "equipmentId": "0059AC000017F1E0",
+            "server": "http://127.0.0.1:8080/v1.0/",
+            "streams": [
+                {
+                    "channelNumber": "1",
+                    "streamId": "16"
+                },
+                {
+                    "channelNumber": "2",
+                    "streamId": "17"
+                },
+                {
+                    "channelNumber": "4",
+                    "streamId": "18"
+                }                
+            ]
+        }
+    ]
+}
